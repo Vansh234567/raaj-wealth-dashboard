@@ -204,25 +204,21 @@ export default function App() {
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", maxWidth: 1400, margin: "0 auto" }}>
           <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
             <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
-              {/* Top-left: purple-to-blue */}
-              <rect x="1" y="1" width="19" height="19" rx="3" fill="#6A287A"/>
-              <path d="M1 12 Q12 1 20 1 L20 20 Q1 20 1 20Z" fill="#0090D0" opacity="0.6"/>
-              <rect x="6" y="6" width="8" height="8" rx="1" fill="white"/>
-              {/* Top-right: blue-to-purple */}
+              <rect x="1" y="1" width="19" height="19" rx="3" fill="#7B2D8B"/>
+              <path d="M20 1 C10 1 1 10 1 20 L20 20 Z" fill="#0090D0"/>
+              <rect x="5" y="5" width="9" height="9" rx="1.5" fill="white"/>
               <rect x="24" y="1" width="19" height="19" rx="3" fill="#0090D0"/>
-              <path d="M43 8 Q32 1 24 1 L24 20 Q43 20 43 20Z" fill="#6A287A" opacity="0.6"/>
-              <rect x="29" y="6" width="8" height="8" rx="1" fill="white"/>
-              {/* Bottom-left: blue-to-navy */}
+              <path d="M24 1 C34 1 43 10 43 20 L24 20 Z" fill="#7B2D8B"/>
+              <rect x="30" y="5" width="9" height="9" rx="1.5" fill="white"/>
               <rect x="1" y="24" width="19" height="19" rx="3" fill="#14285F"/>
-              <path d="M1 36 Q12 43 20 43 L20 24 Q1 24 1 24Z" fill="#0090D0" opacity="0.6"/>
-              <rect x="6" y="29" width="8" height="8" rx="1" fill="white"/>
-              {/* Bottom-right: purple-to-pink */}
-              <rect x="24" y="24" width="19" height="19" rx="3" fill="#6A287A"/>
-              <path d="M43 36 Q32 43 24 43 L24 24 Q43 24 43 24Z" fill="#C0306A" opacity="0.5"/>
-              <rect x="29" y="29" width="8" height="8" rx="1" fill="white"/>
+              <path d="M1 24 C1 34 10 43 20 43 L20 24 Z" fill="#0090D0"/>
+              <rect x="5" y="30" width="9" height="9" rx="1.5" fill="white"/>
+              <rect x="24" y="24" width="19" height="19" rx="3" fill="#7B2D8B"/>
+              <path d="M43 24 C43 34 34 43 24 43 L24 24 Z" fill="#C0306A"/>
+              <rect x="30" y="30" width="9" height="9" rx="1.5" fill="white"/>
             </svg>
             <div>
-              <div style={{ fontSize: 18, fontWeight: 800, color: WHITE, letterSpacing: 0.5 }}>Raj Wealth Sol</div>
+              <div style={{ fontSize: 18, fontWeight: 800, color: WHITE, letterSpacing: 0.5 }}>Raaj Wealth Sol</div>
               <div style={{ fontSize: 11, color: "#A060C0", letterSpacing: 1.5, textTransform: "uppercase" }}>Making Financial Decisions Smarter Through Data</div>
             </div>
           </div>
@@ -576,14 +572,14 @@ export default function App() {
 
         {/* FOOTER */}
         <div style={{ marginTop: 40, borderTop: `1px solid ${GOLD}22`, paddingTop: 24, textAlign: "center" }}>
-          <div style={{ fontSize: 14, fontWeight: 700, color: GOLD, marginBottom: 4 }}>Raj Wealth Sol</div>
+          <div style={{ fontSize: 14, fontWeight: 700, color: GOLD, marginBottom: 4 }}>Raaj Wealth Sol</div>
           <div style={{ fontSize: 11, color: "#3A5F80", marginBottom: 12 }}>Making Financial Decisions Smarter Through Data</div>
           <div style={{ fontSize: 11, color: "#2A4F70", maxWidth: 700, margin: "0 auto", lineHeight: 1.7 }}>
             This dashboard is for educational and illustration purposes only. All calculations are approximations. 
             Investment in mutual funds/SIPs is subject to market risks. Please consult a SEBI-registered financial advisor before making investment decisions.
           </div>
           <div style={{ marginTop: 16, fontSize: 11, color: "#1E3A5F" }}>
-            © 2025 Raj Wealth Sol · For Advisor & Client Use Only
+            © 2025 Raaj Wealth Sol · For Advisor & Client Use Only
           </div>
         </div>
       </div>
