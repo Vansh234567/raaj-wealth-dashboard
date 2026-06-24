@@ -301,8 +301,6 @@ export default function App() {
               </div>
             </div>
 
-            <div style={{ marginTop: 20 }}>
-
             <div style={{ marginTop: 20, background: `${NAVY}88`, borderRadius: 10, padding: 14, border: `1px solid ${GOLD}22` }}>
               <div style={{ fontSize: 11, color: SLATE, marginBottom: 8, textTransform: "uppercase", letterSpacing: 1 }}>Formula Reference</div>
               <div style={{ fontSize: 11, color: "#4A6A8A", lineHeight: 1.8 }}>
