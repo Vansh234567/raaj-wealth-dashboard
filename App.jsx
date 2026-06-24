@@ -302,17 +302,6 @@ export default function App() {
             </div>
 
             <div style={{ marginTop: 20 }}>
-              <div style={{ fontSize: 13, fontWeight: 700, color: GOLD, textTransform: "uppercase", letterSpacing: 1, marginBottom: 12 }}>⚙️ Savings Strategy</div>
-              <div style={{ display: "flex", gap: 8 }}>
-                {[["emi", "Reduce EMI"], ["tenure", "Reduce Tenure"]].map(([v, l]) => (
-                  <button key={v} onClick={() => setMode(v)} style={{
-                    flex: 1, padding: "9px 4px", borderRadius: 8, border: `1px solid ${mode === v ? GOLD : "#1E3A5F"}`,
-                    background: mode === v ? `${GOLD}22` : "transparent",
-                    color: mode === v ? GOLD : SLATE, fontSize: 12, fontWeight: 600, cursor: "pointer"
-                  }}>{l}</button>
-                ))}
-              </div>
-            </div>
 
             <div style={{ marginTop: 20, background: `${NAVY}88`, borderRadius: 10, padding: 14, border: `1px solid ${GOLD}22` }}>
               <div style={{ fontSize: 11, color: SLATE, marginBottom: 8, textTransform: "uppercase", letterSpacing: 1 }}>Formula Reference</div>
