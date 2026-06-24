@@ -113,7 +113,6 @@ export default function App() {
   const [newRate, setNewRate] = useState(8.0);
   const [sipReturn, setSipReturn] = useState(12);
   const [sipFreq, setSipFreq] = useState("monthly");
-  const [mode, setMode] = useState("emi");
   const [activeTab, setActiveTab] = useState("overview");
 
   const calc = useMemo(() => {
@@ -187,7 +186,7 @@ export default function App() {
       sensitivityReturns,
       mc: { worst: p10, base: p50, best: p90, probCrore },
     };
-  }, [loanAmt, tenure, currentRate, newRate, sipReturn, sipFreq, mode]);
+  }, [loanAmt, tenure, currentRate, newRate, sipReturn, sipFreq]);
 
   const tabStyle = (t) => ({
     padding: "8px 20px", borderRadius: 20, cursor: "pointer", fontSize: 13, fontWeight: 600,
