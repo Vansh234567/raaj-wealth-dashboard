@@ -1,8 +1,5 @@
 import { useState, useMemo, useCallback } from "react";
-import {
-  LineChart, Line, AreaChart, Area, BarChart, Bar,
-  XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, ReferenceLine
-} from "recharts";
+
 
 const GOLD = "#0090D0";
 const GOLD_LIGHT = "#4AB8F0";
@@ -109,10 +106,10 @@ const CustomTooltip = ({ active, payload, label }) => {
 export default function App() {
   const isMobile = window.innerWidth < 900;
   const [loanAmt, setLoanAmt] = useState(5000000);
-  const [tenure, setTenure] = useState(20);
+  const [tenure] = useState(20);
   const [currentRate, setCurrentRate] = useState(9.0);
   const [newRate, setNewRate] = useState(8.0);
-  const [sipReturn, setSipReturn] = useState(12);
+  const [sipReturn] = useState(16);
   const [sipFreq, setSipFreq] = useState("monthly");
   const [activeTab, setActiveTab] = useState("overview");
 
@@ -157,23 +154,7 @@ export default function App() {
       };
     }).filter(Boolean);
 
-    // Monte Carlo
-    const simulations = 500;
-    const mcResults = [];
-    for (let s = 0; s < simulations; s++) {
-      let corpus = 0;
-      for (let m = 0; m < months; m++) {
-        const monthlyRet = (sipReturn / 100 / 12) + (Math.random() - 0.5) * 0.012;
-        corpus = (corpus + monthlyEmiSaving) * (1 + monthlyRet);
-      }
-      mcResults.push(corpus);
-    }
-    mcResults.sort((a, b) => a - b);
-    const p10 = mcResults[Math.floor(simulations * 0.1)];
-    const p50 = mcResults[Math.floor(simulations * 0.5)];
-    const p90 = mcResults[Math.floor(simulations * 0.9)];
-    const probCrore = mcResults.filter(v => v >= 1e7).length / simulations * 100;
-
+    
     return {
       origEMI: orig.emi,
       newEMI: revised.emi,
@@ -185,7 +166,6 @@ export default function App() {
       chartData,
       sensitivityData,
       sensitivityReturns,
-      mc: { worst: p10, base: p50, best: p90, probCrore },
     };
   }, [loanAmt, tenure, currentRate, newRate, sipReturn, sipFreq]);
 
@@ -281,7 +261,7 @@ export default function App() {
     scrollbarWidth: "none",
   }}
 >
-          {[["overview", "Overview"], ["charts", "Charts"], ["sensitivity", "Sensitivity Analysis"], ["montecarlo", "Monte Carlo"]].map(([t, l]) => (
+          {[["overview", "Overview"], ["sensitivity", "Sensitivity Analysis"]].map(([t, l]) => (
             <button key={t} style={tabStyle(t)} onClick={() => setActiveTab(t)}>{l}</button>
           ))}
         </div>
@@ -296,22 +276,39 @@ top: isMobile ? 0 : 20}}>
               <div style={{ height: 1, background: `${GOLD}33`, marginBottom: 16 }} />
               <Slider label="Loan Amount" value={loanAmt} min={500000} max={20000000} step={100000}
                 onChange={setLoanAmt} format={v => fmt(v)} />
-              <Slider label="Loan Tenure" value={tenure} min={5} max={30} step={1}
-                onChange={setTenure} format={v => `${v} yrs`} />
               <Slider label="Current Interest Rate" value={currentRate} min={6} max={15} step={0.1}
                 onChange={setCurrentRate} format={v => `${v.toFixed(1)}%`} />
               <Slider label="New Interest Rate" value={newRate} min={5} max={currentRate - 0.1} step={0.1}
                 onChange={v => setNewRate(Math.min(v, currentRate - 0.1))} format={v => `${v.toFixed(1)}%`} />
-              <div style={{ background: `${GOLD}11`, border: `1px solid ${GOLD}33`, borderRadius: 8, padding: "8px 12px", marginTop: 4 }}>
-                <span style={{ fontSize: 12, color: GOLD }}>Rate reduction: {(currentRate - newRate).toFixed(2)}%</span>
-              </div>
-            </div>
+
 
             <div style={{ marginTop: 20 }}>
               <div style={{ fontSize: 13, fontWeight: 700, color: GOLD, textTransform: "uppercase", letterSpacing: 1, marginBottom: 4 }}>📈 SIP Assumptions</div>
               <div style={{ height: 1, background: `${GOLD}33`, marginBottom: 16 }} />
-              <Slider label="Expected Annual SIP Return" value={sipReturn} min={6} max={20} step={0.5}
-                onChange={setSipReturn} format={v => `${v.toFixed(1)}%`} sublabel="Historical Nifty 50 CAGR ~12–14%" />
+              <div
+  style={{
+    background: `${GOLD}11`,
+    border: `1px solid ${GOLD}33`,
+    borderRadius: 8,
+    padding: "10px 14px",
+    marginBottom: 18,
+  }}
+>
+  <div style={{ fontSize: 13, color: SLATE }}>
+    Expected Annual SIP Return
+  </div>
+
+  <div
+    style={{
+      color: GOLD,
+      fontSize: 18,
+      fontWeight: 700,
+      marginTop: 5,
+    }}
+  >
+    16%
+  </div>
+</div>
               <div style={{ marginBottom: 14 }}>
                 <div style={{ fontSize: 13, color: SLATE, marginBottom: 8 }}>SIP Frequency</div>
                 <div style={{ display: "flex", gap: 8 }}>
@@ -325,17 +322,6 @@ top: isMobile ? 0 : 20}}>
                 </div>
               </div>
             </div>
-
-            <div style={{ marginTop: 20, background: `${NAVY}88`, borderRadius: 10, padding: 14, border: `1px solid ${GOLD}22` }}>
-              <div style={{ fontSize: 11, color: SLATE, marginBottom: 8, textTransform: "uppercase", letterSpacing: 1 }}>Formula Reference</div>
-              <div style={{ fontSize: 11, color: "#4A6A8A", lineHeight: 1.8 }}>
-                <div style={{ color: GOLD, fontWeight: 600, marginBottom: 4 }}>EMI = P × r × (1+r)ⁿ / ((1+r)ⁿ - 1)</div>
-                <div>P = Principal • r = Monthly rate • n = Months</div>
-                <div style={{ color: GOLD, fontWeight: 600, marginTop: 8, marginBottom: 4 }}>SIP FV = SIP × ((1+i)ⁿ - 1) / i × (1+i)</div>
-                <div>i = Monthly return • n = Total months</div>
-              </div>
-            </div>
-          </div>
 
           {/* MAIN CONTENT */}
           <div>
@@ -405,32 +391,7 @@ top: isMobile ? 0 : 20}}>
               </>
             )}
 
-            {activeTab === "charts" && (
-              <>
-                <SectionTitle icon="📉">Loan Outstanding Comparison</SectionTitle>
-                <div style={{ background: NAVY_MID, borderRadius: 14, border: `1px solid #1E3A5F`, padding: 18, marginBottom: 24 }}>
-                  <ResponsiveContainer width="100%" height={240}>
-                    <AreaChart data={calc.chartData}>
-                      <defs>
-                        <linearGradient id="gOrig" x1="0" y1="0" x2="0" y2="1">
-                          <stop offset="5%" stopColor="#E74C3C" stopOpacity={0.3} />
-                          <stop offset="95%" stopColor="#E74C3C" stopOpacity={0} />
-                        </linearGradient>
-                        <linearGradient id="gNew" x1="0" y1="0" x2="0" y2="1">
-                          <stop offset="5%" stopColor={SUCCESS} stopOpacity={0.3} />
-                          <stop offset="95%" stopColor={SUCCESS} stopOpacity={0} />
-                        </linearGradient>
-                      </defs>
-                      <CartesianGrid strokeDasharray="3 3" stroke="#1E3A5F" />
-                      <XAxis dataKey="year" stroke={SLATE} tick={{ fontSize: 11 }} label={{ value: "Year", position: "insideBottom", fill: SLATE, fontSize: 11, offset: -2 }} />
-                      <YAxis stroke={SLATE} tick={{ fontSize: 11 }} tickFormatter={v => fmt(v)} />
-                      <Tooltip content={<CustomTooltip />} />
-                      <Legend wrapperStyle={{ fontSize: 12, paddingTop: 8 }} />
-                      <Area type="monotone" dataKey="origOutstanding" name="Current Rate" stroke="#E74C3C" fill="url(#gOrig)" strokeWidth={2} />
-                      <Area type="monotone" dataKey="newOutstanding" name="New Rate" stroke={SUCCESS} fill="url(#gNew)" strokeWidth={2} />
-                    </AreaChart>
-                  </ResponsiveContainer>
-                </div>
+            
 
                 <SectionTitle icon="💸">Annual Interest Paid Comparison</SectionTitle>
                 <div style={{ background: NAVY_MID, borderRadius: 14, border: `1px solid #1E3A5F`, padding: 18, marginBottom: 24 }}>
@@ -531,24 +492,7 @@ top: isMobile ? 0 : 20}}>
               </>
             )}
 
-            {activeTab === "montecarlo" && (
-              <>
-                <SectionTitle icon="🎲">Monte Carlo Simulation — SIP Outcome Distribution</SectionTitle>
-                <div style={{ fontSize: 13, color: SLATE, marginBottom: 20 }}>
-                  500 simulations with randomized monthly returns around your {sipReturn}% target. Shows realistic outcome ranges.
-                </div>
-                <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))", gap: 14, marginBottom: 24 }}>
-                  <MetricCard label="Worst Case (P10)" value={fmt(calc.mc.worst)} sub="10th percentile" />
-                  <MetricCard label="Base Case (P50)" value={fmt(calc.mc.base)} sub="Median outcome" accent />
-                  <MetricCard label="Optimistic (P90)" value={fmt(calc.mc.best)} sub="90th percentile" />
-                  <div style={{ background: NAVY_MID, border: `1px solid ${GOLD}44`, borderRadius: 10, padding: "14px 16px", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
-                    <div style={{ fontSize: 11, color: SLATE, textTransform: "uppercase", letterSpacing: 1, marginBottom: 6 }}>Prob. of ₹1 Cr+</div>
-                    <div style={{ fontSize: 32, fontWeight: 800, color: calc.mc.probCrore > 50 ? SUCCESS : WARN }}>
-                      {calc.mc.probCrore.toFixed(0)}%
-                    </div>
-                    <div style={{ fontSize: 11, color: "#5A7A9A" }}>Probability of crossing ₹1 Crore</div>
-                  </div>
-                </div>
+           
 
                 <div style={{ background: NAVY_MID, borderRadius: 14, border: `1px solid #1E3A5F`, padding: 22 }}>
                   <div style={{ fontSize: 13, fontWeight: 600, color: GOLD, marginBottom: 16 }}>Range Comparison</div>
