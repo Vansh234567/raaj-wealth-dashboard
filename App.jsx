@@ -1,4 +1,4 @@
-import { useState, useMemo,  } from "react";
+import { useState, useMemo  } from "react";
 
 
 const GOLD = "#0090D0";
@@ -245,7 +245,7 @@ top: isMobile ? 0 : 20}}>
               <Slider label="New Interest Rate" value={newRate} min={5} max={currentRate - 0.1} step={0.1}
                 onChange={v => setNewRate(Math.min(v, currentRate - 0.1))} format={v => `${v.toFixed(1)}%`} />
 
-
+</div>
             <div style={{ marginTop: 20 }}>
               <div style={{ fontSize: 13, fontWeight: 700, color: GOLD, textTransform: "uppercase", letterSpacing: 1, marginBottom: 4 }}>📈 SIP Assumptions</div>
               <div style={{ height: 1, background: `${GOLD}33`, marginBottom: 16 }} />
@@ -308,7 +308,7 @@ top: isMobile ? 0 : 20}}>
 <span style={{ color: GOLD, fontWeight: 700 }}>
   {fmt(calc.totalInterestSaved)}
 </span>
-in interest and can potentially create a SIP corpus of{" "}
+{" "}in interest and can potentially create a SIP corpus of{" "}
                     <span style={{ color: GOLD, fontWeight: 700 }}>{fmt(calc.sipFV)}</span> — where compounding alone contributes{" "}
                     <span style={{ color: SUCCESS, fontWeight: 700 }}>{fmt(calc.wealthGain)}</span> above your total investment.
                     The combination of debt optimization and disciplined investing is the most powerful wealth-creation strategy available to homebuyers."
