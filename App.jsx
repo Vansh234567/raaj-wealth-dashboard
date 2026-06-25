@@ -317,17 +317,40 @@ top: isMobile ? 0 : 20}}>
                 {/* ADVISOR EXPLAINER */}
                 <div style={{ background: `linear-gradient(135deg, ${NAVY_MID}, ${NAVY})`, border: `1px solid ${GOLD}44`, borderRadius: 14, padding: 22, marginBottom: 24 }}>
                   <SectionTitle icon="💡">Financial Advisor Insight</SectionTitle>
-                  <p style={{ color: SLATE, lineHeight: 1.8, fontSize: 14, margin: 0 }}>
-                    "Instead of treating a lower interest rate as mere savings, redirecting the cash flow of{" "}
-                    <span style={{ color: GOLD, fontWeight: 700 }}>{fmt(calc.monthlyEmiSaving)}/month</span> into SIP investments allows compounding to work for{" "}
-                    <span style={{ color: GOLD, fontWeight: 700 }}>{tenure} years</span>. The lower interest rate saves{" "}
+                 <p
+  style={{
+    color: WHITE,
+    lineHeight: 1.9,
+    fontSize: 15,
+    margin: 0,
+  }}
+>
+                   
+                   "Your home loan can do more than finance your house.
+
+A lower interest rate can unlock
 <span style={{ color: GOLD, fontWeight: 700 }}>
-  {fmt(calc.totalInterestSaved)}
+  {" "}{fmt(calc.monthlyEmiSaving)}/month
 </span>
-{" "}in interest and can potentially create a SIP corpus of{" "}
-                    <span style={{ color: GOLD, fontWeight: 700 }}>{fmt(calc.sipFV)}</span> where compounding alone contributes{" "}
-                    <span style={{ color: SUCCESS, fontWeight: 700 }}>{fmt(calc.wealthGain)}</span> above your total investment.
-                    The combination of debt optimization and disciplined investing is the most powerful wealth-creation strategy available to homebuyers."
+of additional cash flow.
+
+Investing that amount through disciplined SIPs for
+<span style={{ color: GOLD, fontWeight: 700 }}>
+  {" "}{tenure} years
+</span>
+could build an investment corpus of
+<span style={{ color: SUCCESS, fontWeight: 700 }}>
+  {" "}{fmt(calc.sipFV)}
+</span>
+while also saving
+<span style={{ color: GOLD, fontWeight: 700 }}>
+  {" "}{fmt(calc.totalInterestSaved)}
+</span>
+in interest costs.
+
+One review of your home loan today can potentially create two assets tomorrow:
+🏠 Your fully owned home.
+💰 Your investment portfolio."
                   </p>
                 </div>
 
@@ -388,51 +411,80 @@ top: isMobile ? 0 : 20}}>
 
 <div
   style={{
-    fontSize: 16,
-    lineHeight: 1.8,
-    color: SLATE,
+    fontSize: 20,
+    lineHeight: 2.2,
+    color: WHITE,
+    textAlign: "center",
   }}
 >
-  At the end of the loan tenure, you own your home and could also accumulate approximately{" "}
-  <span
-    style={{
-      color: GOLD,
-      fontWeight: 700,
-    }}
-  >
-    {fmt(calc.sipFV)}
-  </span>{" "}
-  in your investment portfolio through disciplined SIP investing.
+  <div style={{ marginBottom: 24 }}>
+    🏠{" "}
+    <span
+      style={{
+        color: GOLD,
+        fontWeight: 700,
+        fontSize: 24,
+      }}
+    >
+      Your Fully Owned Home
+    </span>
+  </div>
 
-  <br />
-  <br />
-
-  In simple terms, you could potentially have:
-  <br />
-  🏠 Your fully owned house
-  <br />
-  💰 An investment corpus of approximately{" "}
-  <span
-    style={{
-      color: SUCCESS,
-      fontWeight: 700,
-    }}
-  >
-    {fmt(calc.sipFV)}
-  </span>
-  .
+  <div>
+    💰{" "}
+    <span
+      style={{
+        color: SUCCESS,
+        fontWeight: 700,
+        fontSize: 24,
+      }}
+    >
+      Investment Corpus of {fmt(calc.sipFV)}
+    </span>
+  </div>
 </div>
           </div>
         {/* FOOTER */}
         <div style={{ marginTop: 40, borderTop: `1px solid ${GOLD}22`, paddingTop: 24, textAlign: "center" }}>
-          <div style={{ fontSize: 14, fontWeight: 700, color: GOLD, marginBottom: 4 }}>Raaj Wealth Sol</div>
-          <div style={{ fontSize: 11, color: "#7C8CA3", marginBottom: 12 }}>Making Financial Decisions Smarter Through Data</div>
+<div
+  style={{
+    fontSize: 20,
+    fontWeight: 700,
+    color: GOLD,
+    marginBottom: 8,
+  }}
+>
+  Raaj Wealth Sol
+</div>          <div style={{ fontSize: 11, color: "#7C8CA3", marginBottom: 12 }}>Making Financial Decisions Smarter Through Data</div>
+          <div
+  style={{
+    color: NAVY_LIGHT,
+    fontSize: 14,
+    marginBottom: 14,
+  }}
+>
+  Book Your Free Consultation Now
+</div>
+
+<a
+  href="https://bit.ly/RaajConsult"
+  target="_blank"
+  rel="noreferrer"
+  style={{
+    color: GOLD,
+    fontWeight: 700,
+    fontSize: 16,
+    textDecoration: "none",
+  }}
+>
+  https://bit.ly/RaajConsult
+</a>
           <div style={{ fontSize: 11, color: "#66758A", maxWidth: 700, margin: "0 auto", lineHeight: 1.7 }}>
             This dashboard is for educational and illustration purposes only. All calculations are approximations. 
-            Investment in mutual funds/SIPs is subject to market risks. Please consult a SEBI-registered financial advisor before making investment decisions.
+            Investment in mutual funds/SIPs is subject to market risks.
           </div>
           <div style={{ marginTop: 16, fontSize: 11, color: "#4B607A" }}>
-            © 2025 Raaj Wealth Sol · For Advisor & Client Use Only
+            © 2026 Raaj Wealth Sol · For Advisor & Client Use Only
           </div>
         </div>
       </div>
