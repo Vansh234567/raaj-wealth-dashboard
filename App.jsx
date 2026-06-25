@@ -1,4 +1,4 @@
-import { useState, useMemo, useCallback } from "react";
+import { useState, useMemo,  } from "react";
 
 
 const GOLD = "#0090D0";
@@ -123,20 +123,6 @@ export default function App() {
     const totalInvested = monthlyEmiSaving * months;
     const wealthGain = sipFV - totalInvested;
 
-    const chartData = orig.schedule.map((row, i) => {
-      const yr = row.year;
-      const sipCorpus = calcSIPFV(monthlyEmiSaving, sipReturn, yr * 12);
-      return {
-        year: yr,
-        origOutstanding: Math.round(row.outstanding),
-        newOutstanding: Math.round(revised.schedule[i].outstanding),
-        origInterest: Math.round(row.interest),
-        newInterest: Math.round(revised.schedule[i].interest),
-        sipCorpus: Math.round(sipCorpus),
-        totalInvested: Math.round(monthlyEmiSaving * yr * 12),
-      };
-    });
-
     const sensitivityRates = [0.25, 0.5, 0.75, 1.0, 1.25, 1.5, 2.0];
     const sensitivityReturns = [8, 10, 12, 15, 18];
     const sensitivityData = sensitivityRates.map(drop => {
@@ -163,7 +149,6 @@ export default function App() {
       sipFV,
       totalInvested,
       wealthGain,
-      chartData,
       sensitivityData,
       sensitivityReturns,
     };
@@ -322,6 +307,8 @@ top: isMobile ? 0 : 20}}>
                 </div>
               </div>
             </div>
+              </div>
+</div>
 
           {/* MAIN CONTENT */}
           <div>
@@ -351,9 +338,11 @@ top: isMobile ? 0 : 20}}>
                   <p style={{ color: SLATE, lineHeight: 1.8, fontSize: 14, margin: 0 }}>
                     "Instead of treating a lower interest rate as mere savings, redirecting the cash flow of{" "}
                     <span style={{ color: GOLD, fontWeight: 700 }}>{fmt(calc.monthlyEmiSaving)}/month</span> into SIP investments allows compounding to work for{" "}
-                    <span style={{ color: GOLD, fontWeight: 700 }}>{tenure} years</span>. A{" "}
-                    <span style={{ color: GOLD, fontWeight: 700 }}>{(currentRate - newRate).toFixed(2)}% rate reduction</span> not only saves{" "}
-                    <span style={{ color: GOLD, fontWeight: 700 }}>{fmt(calc.totalInterestSaved)}</span> in interest but potentially creates a SIP corpus of{" "}
+                    <span style={{ color: GOLD, fontWeight: 700 }}>{tenure} years</span>. The lower interest rate saves{" "}
+<span style={{ color: GOLD, fontWeight: 700 }}>
+  {fmt(calc.totalInterestSaved)}
+</span>
+in interest and can potentially create a SIP corpus of{" "}{" "}
                     <span style={{ color: GOLD, fontWeight: 700 }}>{fmt(calc.sipFV)}</span> — where compounding alone contributes{" "}
                     <span style={{ color: SUCCESS, fontWeight: 700 }}>{fmt(calc.wealthGain)}</span> above your total investment.
                     The combination of debt optimization and disciplined investing is the most powerful wealth-creation strategy available to homebuyers."
@@ -396,15 +385,12 @@ top: isMobile ? 0 : 20}}>
 
             {activeTab === "sensitivity" && (
               <>
-                <SectionTitle icon="🔬">Sensitivity Analysis — Rate Reduction vs SIP Return</SectionTitle>
-                <div style={{ fontSize: 13, color: SLATE, marginBottom: 16 }}>
-                  Future SIP corpus (top) and wealth gain from compounding (bottom) for different rate cut & return combinations.
-                </div>
+                <SectionTitle icon="🔬">Sensitivity Analysis</SectionTitle>
                 <div style={{ overflowX: "auto", borderRadius: 12, border: `1px solid #1E3A5F` }}>
                   <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 12 }}>
                     <thead>
                       <tr style={{ background: NAVY_MID }}>
-                        <th style={{ padding: "12px 16px", textAlign: "left", color: GOLD, borderBottom: `1px solid ${GOLD}33`, whiteSpace: "nowrap" }}>Rate Reduction</th>
+                        <th style={{ padding: "12px 16px", textAlign: "left", color: GOLD, borderBottom: `1px solid ${GOLD}33`, whiteSpace: "nowrap" }}>Interest Rate Change</th>
                         {calc.sensitivityReturns.map(r => (
                           <th key={r} style={{ padding: "12px 16px", textAlign: "center", color: GOLD, borderBottom: `1px solid ${GOLD}33`, minWidth: 120 }}>
                             {r}% SIP Return
@@ -448,8 +434,8 @@ top: isMobile ? 0 : 20}}>
               </>
             )}
 
-           
-
+                   </div>
+        </div>
                 
 
               
