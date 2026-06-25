@@ -107,6 +107,7 @@ const CustomTooltip = ({ active, payload, label }) => {
 };
 
 export default function App() {
+  const isMobile = window.innerWidth < 900;
   const [loanAmt, setLoanAmt] = useState(5000000);
   const [tenure, setTenure] = useState(20);
   const [currentRate, setCurrentRate] = useState(9.0);
@@ -189,6 +190,7 @@ export default function App() {
   }, [loanAmt, tenure, currentRate, newRate, sipReturn, sipFreq]);
 
   const tabStyle = (t) => ({
+    flexShrink: 0,
     padding: "8px 20px", borderRadius: 20, cursor: "pointer", fontSize: 13, fontWeight: 600,
     border: "none", transition: "all 0.2s",
     background: activeTab === t ? GOLD : "transparent",
@@ -200,7 +202,17 @@ export default function App() {
 
       {/* HEADER */}
       <div style={{ background: `linear-gradient(135deg, ${NAVY} 0%, ${NAVY_MID} 100%)`, borderBottom: `1px solid ${GOLD}33`, padding: "16px 28px" }}>
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", maxWidth: 1400, margin: "0 auto" }}>
+       <div
+  style={{
+    display: "flex",
+    flexDirection: isMobile ? "column" : "row",
+    justifyContent: "space-between",
+    alignItems: isMobile ? "flex-start" : "center",
+    gap: isMobile ? 20 : 0,
+    maxWidth: 1400,
+    margin: "0 auto",
+  }}
+>
           <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
             <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
               <rect x="1" y="1" width="19" height="19" rx="3" fill="#7B2D8B"/>
@@ -229,10 +241,10 @@ export default function App() {
       </div>
 
       {/* HERO */}
-      <div style={{ background: `linear-gradient(135deg, ${NAVY_MID} 0%, ${NAVY} 60%)`, padding: "40px 28px 32px", borderBottom: `1px solid ${GOLD}22`, textAlign: "center" }}>
+      <div style={{ background: `linear-gradient(135deg, ${NAVY_MID} 0%, ${NAVY} 60%)`, padding: isMobile ? "24px 16px" : "40px 28px 32px", borderBottom: `1px solid ${GOLD}22`, textAlign: "center" }}>
         <div style={{ maxWidth: 800, margin: "0 auto" }}>
           <div style={{ fontSize: 11, color: GOLD, letterSpacing: 3, textTransform: "uppercase", marginBottom: 12 }}>Wealth Creation Framework</div>
-          <h1 style={{ margin: "0 0 16px", fontSize: 32, fontWeight: 800, lineHeight: 1.2 }}>
+          <h1 style={{ margin: "0 0 16px", fontSize: isMobile ? 24 : 32, fontWeight: 800, lineHeight: 1.2 }}>
             The <span style={{ color: GOLD }}>1% Rule</span> — How a Lower Home Loan Rate Can Create Crores
           </h1>
           <p style={{ fontSize: 15, color: SLATE, lineHeight: 1.7, maxWidth: 620, margin: "0 auto 24px" }}>
@@ -244,7 +256,7 @@ export default function App() {
               { label: "Interest Saved", value: fmt(calc.totalInterestSaved) },
               { label: "SIP Corpus", value: fmt(calc.sipFV) },
             ].map(({ label, value }) => (
-              <div key={label} style={{ background: `${GOLD}18`, border: `1px solid ${GOLD}44`, borderRadius: 10, padding: "10px 24px", minWidth: 140 }}>
+              <div key={label} style={{ background: `${GOLD}18`, border: `1px solid ${GOLD}44`, borderRadius: 10, padding: "10px 24px", minWidth: isMobile ? 120 : 140 }}>
                 <div style={{ fontSize: 11, color: SLATE, textTransform: "uppercase", letterSpacing: 1 }}>{label}</div>
                 <div style={{ fontSize: 20, fontWeight: 700, color: GOLD }}>{value}</div>
               </div>
@@ -253,19 +265,32 @@ export default function App() {
         </div>
       </div>
 
-      <div style={{ maxWidth: 1400, margin: "0 auto", padding: "28px 28px" }}>
+      <div style={{ maxWidth: 1400, margin: "0 auto", padding: isMobile ? "16px" : "28px 28px" }}>
 
         {/* TABS */}
-        <div style={{ display: "flex", gap: 8, marginBottom: 28, background: NAVY_MID, padding: 6, borderRadius: 25, width: "fit-content" }}>
+        <div
+  style={{
+    display: "flex",
+    gap: 8,
+    marginBottom: 28,
+    background: NAVY_MID,
+    padding: 6,
+    borderRadius: 25,
+    width: "100%",
+    overflowX: "auto",
+    scrollbarWidth: "none",
+  }}
+>
           {[["overview", "Overview"], ["charts", "Charts"], ["sensitivity", "Sensitivity Analysis"], ["montecarlo", "Monte Carlo"]].map(([t, l]) => (
             <button key={t} style={tabStyle(t)} onClick={() => setActiveTab(t)}>{l}</button>
           ))}
         </div>
 
-        <div style={{ display: "grid", gridTemplateColumns: "320px 1fr", gap: 24, alignItems: "start" }}>
+        <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "320px 1fr", gap: 24, alignItems: "start" }}>
 
           {/* INPUT PANEL */}
-          <div style={{ background: NAVY_MID, borderRadius: 14, border: `1px solid #1E3A5F`, padding: 22, position: "sticky", top: 20 }}>
+          <div style={{ background: NAVY_MID, borderRadius: 14, border: `1px solid #1E3A5F`, padding: 22, position: isMobile ? "static" : "sticky",
+top: isMobile ? 0 : 20}}>
             <div style={{ marginBottom: 20 }}>
               <div style={{ fontSize: 13, fontWeight: 700, color: GOLD, textTransform: "uppercase", letterSpacing: 1, marginBottom: 4 }}>🏠 Home Loan Details</div>
               <div style={{ height: 1, background: `${GOLD}33`, marginBottom: 16 }} />
@@ -320,7 +345,10 @@ export default function App() {
                 {/* KEY METRICS */}
                 <div style={{ marginBottom: 24 }}>
                   <SectionTitle icon="📊">Key Metrics</SectionTitle>
-                  <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(150px, 1fr))", gap: 12 }}>
+                  <div style={{ display: "grid", gridTemplateColumns:
+  isMobile
+    ? "1fr"
+    : "repeat(auto-fit, minmax(150px, 1fr))", gap: 12 }}>
                     <MetricCard label="Original EMI" value={fmt(calc.origEMI)} sub={`@ ${currentRate}%`} />
                     <MetricCard label="New EMI" value={fmt(calc.newEMI)} sub={`@ ${newRate}%`} />
                     <MetricCard label="Monthly Savings" value={fmt(calc.monthlyEmiSaving)} sub="Redirected to SIP" accent />
@@ -349,7 +377,7 @@ export default function App() {
                 {/* QUICK LOAN COMPARISON */}
                 <div style={{ background: NAVY_MID, border: `1px solid #1E3A5F`, borderRadius: 14, padding: 22 }}>
                   <SectionTitle icon="⚖️">Loan Comparison</SectionTitle>
-                  <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
+                  <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: 16 }}>
                     {[
                       { title: "Current Loan", rate: currentRate, color: "#E74C3C" },
                       { title: "Revised Loan", rate: newRate, color: SUCCESS },
