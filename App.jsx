@@ -142,7 +142,7 @@ export default function App() {
   });
 
   return (
-    <div style={{ background: NAVY, minHeight: "100vh", fontFamily: "'Inter', 'Segoe UI', sans-serif", color: WHITE }}>
+    <div style={{ background: "#F5F7FA", minHeight: "100vh", fontFamily: "'Inter', 'Segoe UI', sans-serif", color: WHITE }}>
 
       {/* HEADER */}
       <div style={{ background: `linear-gradient(135deg, ${NAVY} 0%, ${NAVY_MID} 100%)`, borderBottom: `1px solid ${GOLD}33`, padding: "16px 28px" }}>
@@ -189,7 +189,7 @@ export default function App() {
         <div style={{ maxWidth: 800, margin: "0 auto" }}>
           <div style={{ fontSize: 11, color: GOLD, letterSpacing: 3, textTransform: "uppercase", marginBottom: 12 }}>Wealth Creation Framework</div>
           <h1 style={{ margin: "0 0 16px", fontSize: isMobile ? 24 : 32, fontWeight: 800, lineHeight: 1.2 }}>
-            The <span style={{ color: GOLD }}>1% Rule</span> — How a Lower Home Loan Rate Can Create Crores
+            The <span style={{ color: GOLD }}>1% Rule</span> 
           </h1>
           <p style={{ fontSize: 15, color: SLATE, lineHeight: 1.7, maxWidth: 620, margin: "0 auto 24px" }}>
             A small reduction in borrowing cost can become a massive wealth creation opportunity through disciplined investing. Redirect your EMI savings into SIPs and let compounding work for you.
@@ -209,7 +209,7 @@ export default function App() {
         </div>
       </div>
 
-      <div style={{ maxWidth: 1400, margin: "0 auto", padding: isMobile ? "16px" : "28px 28px" }}>
+      <div style={{ maxWidth: 1400, margin: "0 auto", padding: isMobile ? "20px" : "32px" }}>
 
         {/* TABS */}
         <div
@@ -246,33 +246,8 @@ top: isMobile ? 0 : 20}}>
                 onChange={v => setNewRate(Math.min(v, currentRate - 0.1))} format={v => `${v.toFixed(1)}%`} />
 
 </div>
-            <div style={{ marginTop: 20 }}>
-              <div style={{ fontSize: 13, fontWeight: 700, color: GOLD, textTransform: "uppercase", letterSpacing: 1, marginBottom: 4 }}>📈 SIP Assumptions</div>
-              <div style={{ height: 1, background: `${GOLD}33`, marginBottom: 16 }} />
-              <div
-  style={{
-    background: `${GOLD}11`,
-    border: `1px solid ${GOLD}33`,
-    borderRadius: 8,
-    padding: "10px 14px",
-    marginBottom: 18,
-  }}
->
-  <div style={{ fontSize: 13, color: SLATE }}>
-    Expected Annual SIP Return
-  </div>
+       
 
-  <div
-    style={{
-      color: GOLD,
-      fontSize: 18,
-      fontWeight: 700,
-      marginTop: 5,
-    }}
-  >
-    16%
-  </div>
-</div>
             </div>
           </div>
        
@@ -349,7 +324,57 @@ top: isMobile ? 0 : 20}}>
           </div>
         </div>
 
-        
+        <div
+  style={{
+    marginTop: 24,
+    background: `linear-gradient(135deg, ${NAVY_MID}, ${NAVY})`,
+    border: `1px solid ${GOLD}44`,
+    borderRadius: 14,
+    padding: 22,
+    textAlign: "center",
+  }}
+>
+  <div
+    style={{
+      fontSize: 22,
+      fontWeight: 700,
+      color: GOLD,
+      marginBottom: 12,
+    }}
+  >
+    Final Outcome
+  </div>
+
+  <div
+    style={{
+      fontSize: 16,
+      lineHeight: 1.8,
+      color: SLATE,
+    }}
+  >
+    You own your house and potentially build a SIP corpus of{" "}
+    <span
+      style={{
+        color: GOLD,
+        fontWeight: 700,
+      }}
+    >
+      {fmt(calc.sipFV)}
+    </span>
+    .
+    <br />
+    In simple terms, you could have your home and approximately{" "}
+    <span
+      style={{
+        color: SUCCESS,
+        fontWeight: 700,
+      }}
+    >
+      {fmt(calc.sipFV)}
+    </span>{" "}
+    in your investment account through disciplined investing and compounding.
+  </div>
+</div>
         {/* FOOTER */}
         <div style={{ marginTop: 40, borderTop: `1px solid ${GOLD}22`, paddingTop: 24, textAlign: "center" }}>
           <div style={{ fontSize: 14, fontWeight: 700, color: GOLD, marginBottom: 4 }}>Raaj Wealth Sol</div>
