@@ -110,7 +110,6 @@ export default function App() {
   const [currentRate, setCurrentRate] = useState(9.0);
   const [newRate, setNewRate] = useState(8.0);
   const [sipReturn] = useState(16);
-  const [sipFreq, setSipFreq] = useState("monthly");
   const [activeTab, setActiveTab] = useState("overview");
 
   const calc = useMemo(() => {
@@ -122,24 +121,6 @@ export default function App() {
     const sipFV = calcSIPFV(monthlyEmiSaving, sipReturn, months);
     const totalInvested = monthlyEmiSaving * months;
     const wealthGain = sipFV - totalInvested;
-
-    const sensitivityRates = [0.25, 0.5, 0.75, 1.0, 1.25, 1.5, 2.0];
-    const sensitivityReturns = [8, 10, 12, 15, 18];
-    const sensitivityData = sensitivityRates.map(drop => {
-      const nr = currentRate - drop;
-      if (nr <= 0) return null;
-      const origSch = calcLoanSchedule(loanAmt, currentRate, tenure);
-      const newSch = calcLoanSchedule(loanAmt, nr, tenure);
-      const saving = origSch.emi - newSch.emi;
-      return {
-        drop,
-        cols: sensitivityReturns.map(ret => {
-          const fv = calcSIPFV(saving, ret, months);
-          return { fv: Math.round(fv), gain: Math.round(fv - saving * months) };
-        })
-      };
-    }).filter(Boolean);
-
     
     return {
       origEMI: orig.emi,
@@ -149,10 +130,8 @@ export default function App() {
       sipFV,
       totalInvested,
       wealthGain,
-      sensitivityData,
-      sensitivityReturns,
     };
-  }, [loanAmt, tenure, currentRate, newRate, sipReturn, sipFreq]);
+  }, [loanAmt, tenure, currentRate, newRate, sipReturn]);
 
   const tabStyle = (t) => ({
     flexShrink: 0,
@@ -241,16 +220,16 @@ export default function App() {
     background: NAVY_MID,
     padding: 6,
     borderRadius: 25,
-    width: "100%",
-    overflowX: "auto",
-    scrollbarWidth: "none",
+    width: "fit-content",
   }}
 >
-          {[["overview", "Overview"], ["sensitivity", "Sensitivity Analysis"]].map(([t, l]) => (
-            <button key={t} style={tabStyle(t)} onClick={() => setActiveTab(t)}>{l}</button>
-          ))}
-        </div>
-
+  <button
+    style={tabStyle("overview")}
+    onClick={() => setActiveTab("overview")}
+  >
+    Overview
+  </button>
+</div>
         <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "320px 1fr", gap: 24, alignItems: "start" }}>
 
           {/* INPUT PANEL */}
@@ -294,22 +273,9 @@ top: isMobile ? 0 : 20}}>
     16%
   </div>
 </div>
-              <div style={{ marginBottom: 14 }}>
-                <div style={{ fontSize: 13, color: SLATE, marginBottom: 8 }}>SIP Frequency</div>
-                <div style={{ display: "flex", gap: 8 }}>
-                  {["monthly", "quarterly", "yearly"].map(f => (
-                    <button key={f} onClick={() => setSipFreq(f)} style={{
-                      flex: 1, padding: "7px 4px", borderRadius: 8, border: `1px solid ${sipFreq === f ? GOLD : "#1E3A5F"}`,
-                      background: sipFreq === f ? `${GOLD}22` : "transparent",
-                      color: sipFreq === f ? GOLD : SLATE, fontSize: 12, fontWeight: 600, cursor: "pointer", textTransform: "capitalize"
-                    }}>{f}</button>
-                  ))}
-                </div>
-              </div>
             </div>
-              </div>
-</div>
-
+          </div>
+       
           {/* MAIN CONTENT */}
           <div>
 
@@ -342,7 +308,7 @@ top: isMobile ? 0 : 20}}>
 <span style={{ color: GOLD, fontWeight: 700 }}>
   {fmt(calc.totalInterestSaved)}
 </span>
-in interest and can potentially create a SIP corpus of{" "}{" "}
+in interest and can potentially create a SIP corpus of{" "}
                     <span style={{ color: GOLD, fontWeight: 700 }}>{fmt(calc.sipFV)}</span> — where compounding alone contributes{" "}
                     <span style={{ color: SUCCESS, fontWeight: 700 }}>{fmt(calc.wealthGain)}</span> above your total investment.
                     The combination of debt optimization and disciplined investing is the most powerful wealth-creation strategy available to homebuyers."
@@ -378,68 +344,12 @@ in interest and can potentially create a SIP corpus of{" "}{" "}
                   </div>
                 </div>
               </>
+      
             )}
-
-
-                
-
-            {activeTab === "sensitivity" && (
-              <>
-                <SectionTitle icon="🔬">Sensitivity Analysis</SectionTitle>
-                <div style={{ overflowX: "auto", borderRadius: 12, border: `1px solid #1E3A5F` }}>
-                  <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 12 }}>
-                    <thead>
-                      <tr style={{ background: NAVY_MID }}>
-                        <th style={{ padding: "12px 16px", textAlign: "left", color: GOLD, borderBottom: `1px solid ${GOLD}33`, whiteSpace: "nowrap" }}>Interest Rate Change</th>
-                        {calc.sensitivityReturns.map(r => (
-                          <th key={r} style={{ padding: "12px 16px", textAlign: "center", color: GOLD, borderBottom: `1px solid ${GOLD}33`, minWidth: 120 }}>
-                            {r}% SIP Return
-                          </th>
-                        ))}
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {calc.sensitivityData.map((row, ri) => (
-                        <tr key={row.drop} style={{ background: ri % 2 === 0 ? NAVY : NAVY_MID }}>
-                          <td style={{ padding: "10px 16px", fontWeight: 700, color: WHITE, borderRight: `1px solid #1E3A5F` }}>
-                            -{row.drop.toFixed(2)}%
-                            <div style={{ fontSize: 10, color: SLATE, fontWeight: 400 }}>
-                              Saves {fmt((() => {
-                                const nr = currentRate - row.drop;
-                                const oe = calcEMI(loanAmt, currentRate, tenure);
-                                const ne = calcEMI(loanAmt, nr, tenure);
-                                return oe - ne;
-                              })())}/mo
-                            </div>
-                          </td>
-                          {row.cols.map((col, ci) => {
-                            const intensity = col.fv / 1e7;
-                            const bg = intensity > 1.5 ? `${SUCCESS}22` : intensity > 0.5 ? `${GOLD}15` : "transparent";
-                            return (
-                              <td key={ci} style={{ padding: "10px 12px", textAlign: "center", background: bg }}>
-                                <div style={{ color: WHITE, fontWeight: 700, fontSize: 13 }}>{fmt(col.fv)}</div>
-                                <div style={{ color: SUCCESS, fontSize: 11 }}>+{fmt(col.gain)}</div>
-                              </td>
-                            );
-                          })}
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-                <div style={{ display: "flex", gap: 16, marginTop: 12, fontSize: 12, color: SLATE }}>
-                  <span>Top row = Total SIP corpus</span>
-                  <span style={{ color: SUCCESS }}>Green = Compounding gain above investment</span>
-                </div>
-              </>
-            )}
-
-                   </div>
+          </div>
         </div>
-                
 
-              
-
+        
         {/* FOOTER */}
         <div style={{ marginTop: 40, borderTop: `1px solid ${GOLD}22`, paddingTop: 24, textAlign: "center" }}>
           <div style={{ fontSize: 14, fontWeight: 700, color: GOLD, marginBottom: 4 }}>Raaj Wealth Sol</div>
