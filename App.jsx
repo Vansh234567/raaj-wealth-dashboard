@@ -325,7 +325,7 @@ top: isMobile ? 0 : 20}}>
   {fmt(calc.totalInterestSaved)}
 </span>
 {" "}in interest and can potentially create a SIP corpus of{" "}
-                    <span style={{ color: GOLD, fontWeight: 700 }}>{fmt(calc.sipFV)}</span> — where compounding alone contributes{" "}
+                    <span style={{ color: GOLD, fontWeight: 700 }}>{fmt(calc.sipFV)}</span> where compounding alone contributes{" "}
                     <span style={{ color: SUCCESS, fontWeight: 700 }}>{fmt(calc.wealthGain)}</span> above your total investment.
                     The combination of debt optimization and disciplined investing is the most powerful wealth-creation strategy available to homebuyers."
                   </p>
