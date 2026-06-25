@@ -232,7 +232,10 @@ fillOpacity="0.12"
           <h1 style={{ margin: "0 0 16px", fontSize: isMobile ? 24 : 32, fontWeight: 800, lineHeight: 1.2 }}>
             The <span style={{ color: GOLD }}>1% Rule</span> 
           </h1>
-          <p style={{ fontSize: 15, color: SLATE, lineHeight: 1.7, maxWidth: 620, margin: "0 auto 24px" }}>
+          <p
+  style={{
+    fontSize: 16,
+    color: "#C5D4E6", lineHeight: 1.7, maxWidth: 620, margin: "0 auto 24px" }}>
             A lower home loan interest rate can free up monthly cash flow. Investing those savings through SIPs allows compounding to build long-term wealth alongside home ownership.
           </p>
           <div style={{ display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap" }}>
@@ -326,7 +329,7 @@ top: isMobile ? 0 : 20}}>
   }}
 >
                    
-                   "Your home loan can do more than finance your house.
+                  Your home loan can do more than finance your house.
 
 A lower interest rate can unlock
 <span style={{ color: GOLD, fontWeight: 700 }}>
@@ -349,8 +352,10 @@ while also saving
 in interest costs.
 
 One review of your home loan today can potentially create two assets tomorrow:
-🏠 Your fully owned home.
-💰 Your investment portfolio."
+
+🏠 Your fully owned home
+
+💰 Your investment portfolio.
                   </p>
                 </div>
 
@@ -420,14 +425,14 @@ One review of your home loan today can potentially create two assets tomorrow:
   <div style={{ marginBottom: 24 }}>
     🏠{" "}
     <span
-      style={{
-        color: GOLD,
-        fontWeight: 700,
-        fontSize: 24,
-      }}
-    >
-      Your Fully Owned Home
-    </span>
+  style={{
+    color: SUCCESS,
+    fontWeight: 700,
+    fontSize: 24,
+  }}
+>
+  Your Fully Owned Home
+</span>
   </div>
 
   <div>
@@ -439,31 +444,51 @@ One review of your home loan today can potentially create two assets tomorrow:
         fontSize: 24,
       }}
     >
-      Investment Corpus of {fmt(calc.sipFV)}
+      Investment Portfolio  of {fmt(calc.sipFV)}
     </span>
   </div>
 </div>
           </div>
         {/* FOOTER */}
-        <div style={{ marginTop: 40, borderTop: `1px solid ${GOLD}22`, paddingTop: 24, textAlign: "center" }}>
 <div
   style={{
-    fontSize: 20,
+    marginTop: 50,
+    background: `linear-gradient(135deg, ${NAVY_MID}, ${NAVY})`,
+    borderRadius: 18,
+    border: `1px solid ${GOLD}33`,
+    padding: "36px 24px",
+    textAlign: "center",
+  }}
+>
+  <div
+  style={{
+    fontSize: 22,
     fontWeight: 700,
     color: GOLD,
-    marginBottom: 8,
+    marginBottom: 10,
+    letterSpacing: "0.5px",
+    textShadow: `0 0 12px ${GOLD}55`,
   }}
 >
   Raaj Wealth Sol
-</div>          <div style={{ fontSize: 11, color: "#7C8CA3", marginBottom: 12 }}>Making Financial Decisions Smarter Through Data</div>
+</div>        <div
+  style={{
+    fontSize: 13,
+    color: "#D5E3F2",
+    marginBottom: 20,
+    letterSpacing: "0.5px",
+  }}
+>
+  Making Financial Decisions Smarter Through Data
+</div>
           <div
   style={{
-    color: NAVY_LIGHT,
+color: WHITE,
     fontSize: 14,
     marginBottom: 14,
   }}
 >
-  Book Your Free Consultation Now
+ Review Your Home Loan. Build Your Wealth. Book a Free Consultation.
 </div>
 
 <a
@@ -471,19 +496,26 @@ One review of your home loan today can potentially create two assets tomorrow:
   target="_blank"
   rel="noreferrer"
   style={{
-    color: GOLD,
-    fontWeight: 700,
-    fontSize: 16,
+    display: "inline-block",
+    marginTop: 8,
+    marginBottom: 24,
+    background: GOLD,
+    color: NAVY,
+    padding: "12px 26px",
+    borderRadius: 10,
     textDecoration: "none",
+    fontWeight: 700,
+    fontSize: 15,
+    boxShadow: `0 6px 20px ${GOLD}44`,
   }}
 >
-  https://bit.ly/RaajConsult
+  Book Free Consultation
 </a>
-          <div style={{ fontSize: 11, color: "#66758A", maxWidth: 700, margin: "0 auto", lineHeight: 1.7 }}>
+          <div style={{ fontSize: 11, color: "#FFFFFFCC", maxWidth: 700, margin: "0 auto", lineHeight: 1.7 }}>
             This dashboard is for educational and illustration purposes only. All calculations are approximations. 
             Investment in mutual funds/SIPs is subject to market risks.
           </div>
-          <div style={{ marginTop: 16, fontSize: 11, color: "#4B607A" }}>
+          <div style={{ marginTop: 16, fontSize: 11, color: "#FFFFFF99" }}>
             © 2026 Raaj Wealth Sol · For Advisor & Client Use Only
           </div>
         </div>
