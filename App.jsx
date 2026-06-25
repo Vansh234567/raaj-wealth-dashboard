@@ -391,52 +391,8 @@ top: isMobile ? 0 : 20}}>
               </>
             )}
 
-            
 
-                <SectionTitle icon="💸">Annual Interest Paid Comparison</SectionTitle>
-                <div style={{ background: NAVY_MID, borderRadius: 14, border: `1px solid #1E3A5F`, padding: 18, marginBottom: 24 }}>
-                  <ResponsiveContainer width="100%" height={240}>
-                    <BarChart data={calc.chartData}>
-                      <CartesianGrid strokeDasharray="3 3" stroke="#1E3A5F" />
-                      <XAxis dataKey="year" stroke={SLATE} tick={{ fontSize: 11 }} />
-                      <YAxis stroke={SLATE} tick={{ fontSize: 11 }} tickFormatter={v => fmt(v)} />
-                      <Tooltip content={<CustomTooltip />} />
-                      <Legend wrapperStyle={{ fontSize: 12 }} />
-                      <Bar dataKey="origInterest" name="Interest @ Current Rate" fill="#E74C3C" radius={[3, 3, 0, 0]} />
-                      <Bar dataKey="newInterest" name="Interest @ New Rate" fill={SUCCESS} radius={[3, 3, 0, 0]} />
-                    </BarChart>
-                  </ResponsiveContainer>
-                </div>
-
-                <SectionTitle icon="🚀">SIP Corpus Growth — Compounding Effect</SectionTitle>
-                <div style={{ background: NAVY_MID, borderRadius: 14, border: `1px solid #1E3A5F`, padding: 18, marginBottom: 24 }}>
-                  <ResponsiveContainer width="100%" height={260}>
-                    <AreaChart data={calc.chartData}>
-                      <defs>
-                        <linearGradient id="gSIP" x1="0" y1="0" x2="0" y2="1">
-                          <stop offset="5%" stopColor={GOLD} stopOpacity={0.4} />
-                          <stop offset="95%" stopColor={GOLD} stopOpacity={0} />
-                        </linearGradient>
-                        <linearGradient id="gInv" x1="0" y1="0" x2="0" y2="1">
-                          <stop offset="5%" stopColor={SLATE} stopOpacity={0.3} />
-                          <stop offset="95%" stopColor={SLATE} stopOpacity={0} />
-                        </linearGradient>
-                      </defs>
-                      <CartesianGrid strokeDasharray="3 3" stroke="#1E3A5F" />
-                      <XAxis dataKey="year" stroke={SLATE} tick={{ fontSize: 11 }} />
-                      <YAxis stroke={SLATE} tick={{ fontSize: 11 }} tickFormatter={v => fmt(v)} />
-                      <Tooltip content={<CustomTooltip />} />
-                      <Legend wrapperStyle={{ fontSize: 12 }} />
-                      <Area type="monotone" dataKey="totalInvested" name="Amount Invested" stroke={SLATE} fill="url(#gInv)" strokeWidth={1.5} strokeDasharray="4 2" />
-                      <Area type="monotone" dataKey="sipCorpus" name="SIP Corpus Value" stroke={GOLD} fill="url(#gSIP)" strokeWidth={2.5} />
-                    </AreaChart>
-                  </ResponsiveContainer>
-                  <div style={{ textAlign: "center", marginTop: 8 }}>
-                    <span style={{ fontSize: 12, color: SLATE }}>Gap between lines = Wealth created by compounding alone</span>
-                  </div>
-                </div>
-              </>
-            )}
+                
 
             {activeTab === "sensitivity" && (
               <>
@@ -494,39 +450,9 @@ top: isMobile ? 0 : 20}}>
 
            
 
-                <div style={{ background: NAVY_MID, borderRadius: 14, border: `1px solid #1E3A5F`, padding: 22 }}>
-                  <div style={{ fontSize: 13, fontWeight: 600, color: GOLD, marginBottom: 16 }}>Range Comparison</div>
-                  {[
-                    { label: "Worst Case", value: calc.mc.worst, color: "#E74C3C", pct: 10 },
-                    { label: "Base Case", value: calc.mc.base, color: GOLD, pct: 50 },
-                    { label: "Optimistic", value: calc.mc.best, color: SUCCESS, pct: 90 },
-                  ].map(({ label, value, color, pct }) => (
-                    <div key={label} style={{ marginBottom: 16 }}>
-                      <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 6 }}>
-                        <span style={{ fontSize: 13, color: SLATE }}>{label} <span style={{ color: "#3A5F80", fontSize: 11 }}>(P{pct})</span></span>
-                        <span style={{ fontSize: 14, fontWeight: 700, color }}>{fmt(value)}</span>
-                      </div>
-                      <div style={{ height: 8, background: "#1E3A5F", borderRadius: 4, overflow: "hidden" }}>
-                        <div style={{
-                          height: "100%", borderRadius: 4, background: color,
-                          width: `${Math.min(100, (value / calc.mc.best) * 100).toFixed(1)}%`,
-                          transition: "width 0.5s ease"
-                        }} />
-                      </div>
-                    </div>
-                  ))}
-                </div>
+                
 
-                <div style={{ background: `${GOLD}11`, border: `1px solid ${GOLD}33`, borderRadius: 10, padding: 16, marginTop: 16 }}>
-                  <div style={{ fontSize: 12, color: GOLD, fontWeight: 600, marginBottom: 6 }}>⚠️ Important Disclaimer</div>
-                  <div style={{ fontSize: 12, color: SLATE, lineHeight: 1.7 }}>
-                    Monte Carlo simulations are based on randomized return distributions. Actual market returns are non-linear and subject to volatility, market risks, and macroeconomic factors. Past performance does not guarantee future results. Mutual fund investments are subject to market risks. Please read all scheme-related documents carefully.
-                  </div>
-                </div>
-              </>
-            )}
-          </div>
-        </div>
+              
 
         {/* FOOTER */}
         <div style={{ marginTop: 40, borderTop: `1px solid ${GOLD}22`, paddingTop: 24, textAlign: "center" }}>
