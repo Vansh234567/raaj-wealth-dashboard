@@ -7,7 +7,7 @@ const NAVY = "#0D1B35";
 const NAVY_MID = "#14285F";
 const NAVY_LIGHT = "#1A3A7A";
 const WHITE = "#FFFFFF";
-const SLATE = "#7A9AC0";
+const SLATE = "#5B6B85";
 const PURPLE = "#6A287A";
 const SUCCESS = "#2ECC71";
 const WARN = "#F39C12";
@@ -158,20 +158,57 @@ export default function App() {
   }}
 >
           <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
-            <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect x="1" y="1" width="19" height="19" rx="3" fill="#7B2D8B"/>
-              <path d="M20 1 C10 1 1 10 1 20 L20 20 Z" fill="#0090D0"/>
-              <rect x="5" y="5" width="9" height="9" rx="1.5" fill="white"/>
-              <rect x="24" y="1" width="19" height="19" rx="3" fill="#0090D0"/>
-              <path d="M24 1 C34 1 43 10 43 20 L24 20 Z" fill="#7B2D8B"/>
-              <rect x="30" y="5" width="9" height="9" rx="1.5" fill="white"/>
-              <rect x="1" y="24" width="19" height="19" rx="3" fill="#14285F"/>
-              <path d="M1 24 C1 34 10 43 20 43 L20 24 Z" fill="#0090D0"/>
-              <rect x="5" y="30" width="9" height="9" rx="1.5" fill="white"/>
-              <rect x="24" y="24" width="19" height="19" rx="3" fill="#7B2D8B"/>
-              <path d="M43 24 C43 34 34 43 24 43 L24 24 Z" fill="#C0306A"/>
-              <rect x="30" y="30" width="9" height="9" rx="1.5" fill="white"/>
-            </svg>
+           <svg width="44" height="44" viewBox="0 0 100 100" fill="none">
+  <defs>
+    <linearGradient id="grad1" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stopColor="#C2188B" />
+      <stop offset="100%" stopColor="#5E2CA5" />
+    </linearGradient>
+
+    <linearGradient id="grad2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stopColor="#1EA7FD" />
+      <stop offset="100%" stopColor="#2E3192" />
+    </linearGradient>
+
+    <linearGradient id="grad3" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stopColor="#1EA7FD" />
+      <stop offset="100%" stopColor="#2E3192" />
+    </linearGradient>
+
+    <linearGradient id="grad4" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stopColor="#7A1FA2" />
+      <stop offset="100%" stopColor="#C2188B" />
+    </linearGradient>
+  </defs>
+
+  <rect x="0" y="0" width="45" height="45" rx="4" fill="url(#grad1)" />
+  <path
+    d="M0 0 C28 0 45 17 45 45 L45 45 L0 45 Z"
+    fill="rgba(255,255,255,0.12)"
+  />
+  <rect x="16" y="16" width="13" height="13" fill="white" />
+
+  <rect x="55" y="0" width="45" height="45" rx="4" fill="url(#grad2)" />
+  <path
+    d="M55 0 C55 25 75 45 100 45 L100 45 L55 45 Z"
+    fill="rgba(255,255,255,0.12)"
+  />
+  <rect x="71" y="16" width="13" height="13" fill="white" />
+
+  <rect x="0" y="55" width="45" height="45" rx="4" fill="url(#grad3)" />
+  <path
+    d="M0 55 C25 55 45 75 45 100 L45 100 L0 100 Z"
+    fill="rgba(255,255,255,0.12)"
+  />
+  <rect x="16" y="71" width="13" height="13" fill="white" />
+
+  <rect x="55" y="55" width="45" height="45" rx="4" fill="url(#grad4)" />
+  <path
+    d="M55 55 C55 80 75 100 100 100 L100 100 L55 100 Z"
+    fill="rgba(255,255,255,0.12)"
+  />
+  <rect x="71" y="71" width="13" height="13" fill="white" />
+</svg>
             <div>
               <div style={{ fontSize: 18, fontWeight: 800, color: WHITE, letterSpacing: 0.5 }}>Raaj Wealth Sol</div>
               <div style={{ fontSize: 11, color: "#A060C0", letterSpacing: 1.5, textTransform: "uppercase" }}>Making Financial Decisions Smarter Through Data</div>
@@ -192,7 +229,7 @@ export default function App() {
             The <span style={{ color: GOLD }}>1% Rule</span> 
           </h1>
           <p style={{ fontSize: 15, color: SLATE, lineHeight: 1.7, maxWidth: 620, margin: "0 auto 24px" }}>
-            A small reduction in borrowing cost can become a massive wealth creation opportunity through disciplined investing. Redirect your EMI savings into SIPs and let compounding work for you.
+            A lower home loan interest rate can free up monthly cash flow. Investing those savings through SIPs allows compounding to build long-term wealth alongside home ownership.
           </p>
           <div style={{ display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap" }}>
             {[
@@ -245,7 +282,7 @@ top: isMobile ? 0 : 20}}>
               <Slider label="New Interest Rate" value={newRate} min={5} max={currentRate - 0.1} step={0.1}
                 onChange={v => setNewRate(Math.min(v, currentRate - 0.1))} format={v => `${v.toFixed(1)}%`} />
 
-</div>
+
        
 
             </div>
@@ -352,7 +389,7 @@ top: isMobile ? 0 : 20}}>
       color: SLATE,
     }}
   >
-    You own your house and potentially build a SIP corpus of{" "}
+    At the end of the loan tenure, you own your home and could also accumulate approximately {" "} in your investment portfolio through disciplined SIP investing.
     <span
       style={{
         color: GOLD,
