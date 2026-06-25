@@ -184,28 +184,32 @@ export default function App() {
   <rect x="0" y="0" width="45" height="45" rx="4" fill="url(#grad1)" />
   <path
     d="M0 0 C28 0 45 17 45 45 L45 45 L0 45 Z"
-    fill="rgba(255,255,255,0.12)"
+    fill="white"
+fillOpacity="0.12"
   />
   <rect x="16" y="16" width="13" height="13" fill="white" />
 
   <rect x="55" y="0" width="45" height="45" rx="4" fill="url(#grad2)" />
   <path
     d="M55 0 C55 25 75 45 100 45 L100 45 L55 45 Z"
-    fill="rgba(255,255,255,0.12)"
+    fill="white"
+fillOpacity="0.12"
   />
   <rect x="71" y="16" width="13" height="13" fill="white" />
 
   <rect x="0" y="55" width="45" height="45" rx="4" fill="url(#grad3)" />
   <path
     d="M0 55 C25 55 45 75 45 100 L45 100 L0 100 Z"
-    fill="rgba(255,255,255,0.12)"
+    fill="white"
+fillOpacity="0.12"
   />
   <rect x="16" y="71" width="13" height="13" fill="white" />
 
   <rect x="55" y="55" width="45" height="45" rx="4" fill="url(#grad4)" />
   <path
     d="M55 55 C55 80 75 100 100 100 L100 100 L55 100 Z"
-    fill="rgba(255,255,255,0.12)"
+    fill="white"
+fillOpacity="0.12"
   />
   <rect x="71" y="71" width="13" height="13" fill="white" />
 </svg>
@@ -379,48 +383,55 @@ top: isMobile ? 0 : 20}}>
       marginBottom: 12,
     }}
   >
-    Final Outcome
+    Your Wealth Position After 20 Years
   </div>
 
-  <div
+<div
+  style={{
+    fontSize: 16,
+    lineHeight: 1.8,
+    color: SLATE,
+  }}
+>
+  At the end of the loan tenure, you own your home and could also accumulate approximately{" "}
+  <span
     style={{
-      fontSize: 16,
-      lineHeight: 1.8,
-      color: SLATE,
+      color: GOLD,
+      fontWeight: 700,
     }}
   >
-    At the end of the loan tenure, you own your home and could also accumulate approximately {" "} in your investment portfolio through disciplined SIP investing.
-    <span
-      style={{
-        color: GOLD,
-        fontWeight: 700,
-      }}
-    >
-      {fmt(calc.sipFV)}
-    </span>
-    .
-    <br />
-    In simple terms, you could have your home and approximately{" "}
-    <span
-      style={{
-        color: SUCCESS,
-        fontWeight: 700,
-      }}
-    >
-      {fmt(calc.sipFV)}
-    </span>{" "}
-    in your investment account through disciplined investing and compounding.
-  </div>
+    {fmt(calc.sipFV)}
+  </span>{" "}
+  in your investment portfolio through disciplined SIP investing.
+
+  <br />
+  <br />
+
+  In simple terms, you could potentially have:
+  <br />
+  🏠 Your fully owned house
+  <br />
+  💰 An investment corpus of approximately{" "}
+  <span
+    style={{
+      color: SUCCESS,
+      fontWeight: 700,
+    }}
+  >
+    {fmt(calc.sipFV)}
+  </span>
+  .
 </div>
+          </div>
         {/* FOOTER */}
         <div style={{ marginTop: 40, borderTop: `1px solid ${GOLD}22`, paddingTop: 24, textAlign: "center" }}>
           <div style={{ fontSize: 14, fontWeight: 700, color: GOLD, marginBottom: 4 }}>Raaj Wealth Sol</div>
-          <div style={{ fontSize: 11, color: "#3A5F80", marginBottom: 12 }}>Making Financial Decisions Smarter Through Data</div>
-          <div style={{ fontSize: 11, color: "#2A4F70", maxWidth: 700, margin: "0 auto", lineHeight: 1.7 }}>
+          <div style={{ fontSize: 11, color: "#7C8CA3", marginBottom: 12 }}>Making Financial Decisions Smarter Through Data</div>
+          <div style={{ fontSize: 11, color: "#66758A", maxWidth: 700, margin: "0 auto", lineHeight: 1.7 }}>
             This dashboard is for educational and illustration purposes only. All calculations are approximations. 
             Investment in mutual funds/SIPs is subject to market risks. Please consult a SEBI-registered financial advisor before making investment decisions.
           </div>
-          <div style={{ marginTop: 16, fontSize: 11, color: "#1E3A5F" }}>
+          <div style={{ marginTop: 16, fontSize: 11, color: "#4B607A" }}>
             © 2025 Raaj Wealth Sol · For Advisor & Client Use Only
           </div>
         </div>
